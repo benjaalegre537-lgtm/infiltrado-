@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Los Six Sevens · El Infiltrado</title>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#6a1fe0"><link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07030f;--card:#120a24;--line:#3b1d78;--v:#8b3dff;--v2:#b98bff;--tx:#efe8ff;--mut:#9d8cc4;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--tx);font:16px/1.4 Poppins,system-ui,sans-serif}
+body{display:flex;justify-content:center;background:radial-gradient(circle at 50% 0,#2a0f5e66,transparent 55%),var(--bg)}
+#app{width:100%;max-width:430px;position:relative;overflow-x:hidden}
+.s{display:none;flex-direction:column;align-items:center;gap:14px;padding:22px 22px 30px;min-height:100%;text-align:center}
+.s.on{display:flex;animation:in .45s ease both}
+@keyframes in{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.mk{font-family:'Permanent Marker',cursive,sans-serif;transform:skew(-7deg);text-shadow:0 0 18px var(--v);color:var(--v2);margin:0}
+.tag{color:var(--mut);font-size:13px;margin:0}
+h2{margin:6px 0 0;font-size:20px;letter-spacing:.04em}
+.btn{width:100%;border:0;border-radius:999px;padding:14px 24px;color:#fff;font:700 16px Poppins,sans-serif;background:linear-gradient(#a05cff,#6a1fe0);box-shadow:0 0 26px #8b3dff77;cursor:pointer;transition:transform .12s}
+.btn:active{transform:scale(.96)}
+.btn.o{background:transparent;border:2px solid var(--v);box-shadow:0 0 18px #8b3dff55}
+.btn:focus-visible,.cell:focus-visible,input:focus-visible{outline:3px solid var(--v2);outline-offset:2px}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 4px;color:var(--tx);font:600 16px Poppins,sans-serif;cursor:pointer;transition:.2s}
+.cell.sel{border-color:var(--v2);background:#2a1260;box-shadow:0 0 20px var(--v);animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.1)}}
+.step{display:flex;gap:14px;text-align:left;align-items:center;width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.step b{display:block}.step span{color:var(--mut);font-size:13px}
+.step i{font-size:26px;font-style:normal}
+input[type=text]{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--tx);font:16px Poppins,sans-serif;text-align:center;text-transform:uppercase}
+.note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--mut);font-size:14px;width:100%}
+.crown{width:70px;color:var(--v2);filter:drop-shadow(0 0 12px var(--v))}
+.float{animation:fl 3s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-10px)}}
+.flick{animation:fk 4s infinite}
+@keyframes fk{0%,92%,96%,100%{opacity:1}94%{opacity:.35}98%{opacity:.7}}
+.bar{width:100%;height:10px;background:var(--card);border-radius:9px;overflow:hidden;border:1px solid var(--line)}
+.bar div{height:100%;background:linear-gradient(90deg,#6a1fe0,#c08bff);width:100%;transition:width 1s linear}
+.time{font:700 34px Poppins;border:2px solid var(--v);border-radius:999px;padding:6px 26px;box-shadow:0 0 20px #8b3dff66}
+.time.hot{color:#ff5c8a;border-color:#ff5c8a;animation:pop .5s infinite}
+.row{display:flex;align-items:center;gap:12px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--tx);font:600 16px Poppins,sans-serif;text-align:left;cursor:pointer}
+.row.sel{border-color:var(--v2);background:#2a1260;box-shadow:0 0 18px #8b3dff88}
+.row u{width:20px;height:20px;border-radius:50%;border:2px solid var(--mut);flex:none}
+.row.sel u{border-color:var(--v2);background:radial-gradient(#fff 35%,var(--v) 40%)}
+.row em{margin-left:auto;font-style:normal;color:var(--v2)}
+.orb{width:150px;height:150px;border-radius:50%;border:3px solid var(--v);display:grid;place-items:center;font-size:64px;box-shadow:0 0 40px var(--v),inset 0 0 30px #8b3dff55;animation:fl 2.5s ease-in-out infinite}
+.orb.flip{animation:flip .8s}
+@keyframes flip{from{transform:rotateY(90deg) scale(.5)}}
+.who{font-size:44px;animation:in .6s both}
+.sp{position:fixed;bottom:-10px;width:6px;height:6px;border-radius:50%;background:var(--v2);box-shadow:0 0 10px var(--v);animation:up 2s ease-out forwards;pointer-events:none}
+@keyframes up{to{transform:translateY(-95vh) translateX(var(--x));opacity:0}}
+#mute,#mus{position:absolute;top:calc(env(safe-area-inset-top,0px) + 8px);right:10px;background:none;border:0;font-size:20px;cursor:pointer;z-index:5;color:var(--tx)}
+.foot{margin-top:auto;color:var(--v2);font-size:12px;padding-top:10px}
+.back{align-self:flex-start;background:none;border:0;color:var(--tx);font-size:24px;cursor:pointer;padding:0}
+#mus{right:46px}
+#chat{width:100%;height:36vh;min-height:170px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;background:#0c0618;border:1px solid var(--line);border-radius:14px;padding:10px;text-align:left}
+.m{display:flex;gap:8px;align-items:flex-start;animation:in .25s both}
+.m b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#14061f;font-size:14px}
+.m p{margin:0;background:var(--card);border:1px solid var(--line);border-radius:4px 14px 14px 14px;padding:6px 10px;max-width:80%}
+.m small{display:block;color:var(--mut);font-size:11px}
+.m span{overflow-wrap:anywhere}
+.m.me{flex-direction:row-reverse}.m.me p{background:#2a1260;border-color:var(--v2);border-radius:14px 4px 14px 14px}
+.m.sys p{background:none;border:0;color:var(--mut);font-size:13px;text-align:center;max-width:100%;margin:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;width:100%;padding-bottom:2px}
+.chip{flex:none;background:var(--card);border:1px solid var(--line);color:var(--tx);border-radius:999px;padding:6px 12px;font:13px Poppins,sans-serif;cursor:pointer;white-space:nowrap}
+.chip.sel{background:#2a1260;border-color:var(--v2);box-shadow:0 0 12px #8b3dff88}
+.send{display:flex;gap:8px;width:100%}.send .btn{width:56px;padding:0;flex:none}
+#mi{text-transform:none;text-align:left}
+.av{--s:36px;width:var(--s);height:var(--s);border-radius:50%;display:inline-grid;place-items:center;flex:none;position:relative;font-size:calc(var(--s)*.58);line-height:1;box-shadow:0 0 12px #0006}.av i{position:absolute;top:-30%;font-style:normal;font-size:.62em}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div id="app"><button id="mute" aria-label="Sonido">🔊</button><button id="mus" aria-label="Música">🎵</button>
+
+<section class="s on" id="s0">
+ <svg class="crown float" viewBox="0 0 24 24" style="margin-top:30px"><path d="M3 18 2 7l5 4 5-8 5 8 5-4-1 11z" fill="currentColor"/></svg>
+ <h1 class="mk flick" style="font-size:44px;line-height:1.05;margin-top:6px">LOS<br>SIX SEVENS<br><span style="font-size:60px">67</span></h1>
+ <h2 class="mk" style="background:#6a1fe0;color:#fff;padding:6px 22px;font-size:26px;text-shadow:none">EL INFILTRADO</h2>
+ <p class="tag" style="font-size:15px;color:var(--tx)">¿Quién es el infiltrado?</p>
+ <button class="btn o" id="go0" style="margin-top:auto">EMPEZAR →</button>
+ <p class="foot">✦ Creado para mis Six Sevens ✦</p>
+</section>
+
+<section class="s" id="s1">
+ <h2 class="mk">Cómo jugar</h2>
+ <div class="step"><i>👥</i><p style="margin:0"><b>1. Se forman grupos</b><span>Entre 3 y 10 jugadores (o más, ¡cuantos más mejor!)</span></p></div>
+ <div class="step"><i>🔤</i><p style="margin:0"><b>2. Todos reciben una palabra</b><span>Excepto uno…</span></p></div>
+ <div class="step"><i>👁️</i><p style="margin:0"><b>3. Descubran al infiltrado</b><span>Hablen, pregunten, analicen. ¡No se confíen!</span></p></div>
+ <div class="step"><i>🏆</i><p style="margin:0"><b>4. El grupo vota</b><span>Al final, decidan quién es el infiltrado.</span></p></div>
+ <button class="btn" id="go1">¡VAMOS! →</button>
+ <p class="foot">✦ Creado para mis Six Sevens ✦</p>
+</section>
+
+<section class="s" id="s2">
+ <h2 style="margin-top:20px">TAMAÑO DEL GRUPO</h2>
+ <p class="tag">¿Cuántos van a jugar? (contá también al infiltrado · mínimo 3)</p>
+ <div class="g" id="sizes"></div>
+ <p class="tag" style="margin-top:6px">¿Online, cada uno en su celu? Poné tu nombre y un código de sala (el mismo para todos).</p><div id="avp" style="display:flex;align-items:center;gap:12px;justify-content:center;width:100%"><span id="avv"></span><div class="chips" style="width:auto;flex-wrap:wrap;justify-content:center"><button class="chip" data-k="0">🎨 Color</button><button class="chip" data-k="1">🙂 Cara</button><button class="chip" data-k="2">🎩 Extra</button><button class="chip" data-k="3">🎲 Al azar</button></div></div><input type="text" id="nm0" maxlength="12" placeholder="TU NOMBRE" autocomplete="off">
+ <input type="text" id="code" maxlength="8" placeholder="CÓDIGO DE SALA (OPCIONAL)" autocomplete="off">
+ <div id="seats" style="width:100%"></div><button class="btn o" id="go2o">🌐 JUGAR ONLINE</button>
+ <button class="btn" id="go2">CONTINUAR →</button>
+ <p class="foot">✦ Creado para mis Six Sevens ✦</p>
+</section>
+
+<section class="s" id="s3"></section>
+
+<section class="s" id="s4">
+ <div class="time" id="tm">03:00</div>
+ <div class="bar"><div id="pb"></div></div>
+ <h2>DISCUSIÓN</h2>
+ <p class="tag" id="cs"></p><div class="chips" id="sp"></div>
+ <div id="chat" role="log" aria-live="polite"></div><div class="chips" id="pt"></div><div class="chips" id="qs"></div><div class="send"><input type="text" id="mi" maxlength="140" placeholder="Escribí tu mensaje…" autocomplete="off"><button class="btn" id="sb" aria-label="Enviar">➤</button></div>
+ 
+ <p class="tag" id="tw" style="display:none;margin-top:auto">Solo el anfitrión 👑 puede pasar a votar (o cuando termine el tiempo).</p><button class="btn" id="go4" style="margin-top:auto">IR A VOTAR →</button>
+</section>
+
+<section class="s" id="s5">
+ <h2 style="margin-top:20px">VOTACIÓN FINAL</h2>
+ <p class="tag">¿Quién creen que es el infiltrado?</p>
+ <div id="vl" style="width:100%;display:grid;gap:10px"></div>
+ <button class="btn" id="go5">VOTAR →</button>
+</section>
+
+<section class="s" id="s6">
+ <h2 style="margin-top:20px">RESULTADO</h2>
+ <div class="orb" id="orb">?</div>
+ <p class="mk" id="rt" style="font-size:20px">¡EL INFILTRADO ERA…!</p>
+ <p class="mk who" id="who" style="visibility:hidden"></p>
+ <div class="note" id="msg" style="visibility:hidden"></div>
+ <button class="btn o" id="go6">VER RANKING</button>
+</section>
+
+<section class="s" id="s7">
+ <h2 style="margin-top:20px">RANKING</h2>
+ <p class="tag">Los mejores detectives del canal</p>
+ <div id="rk" style="width:100%;display:grid;gap:8px"></div>
+ <div id="cw2" style="display:none;width:100%"><p class="tag">Categoría de la próxima ronda · la elige el anfitrión 👑</p><div class="chips" id="cats2" style="flex-wrap:wrap;justify-content:center"></div></div><button class="btn" id="again">OTRA RONDA ↻</button>
+ <button class="btn o" id="home">🏠 VOLVER AL INICIO</button>
+ <p class="foot">Los Six Sevens · más que un canal, una familia 👑</p>
+</section>
+<section class="s" id="s8"><h2 style="margin-top:20px">SALA</h2><div class="time" id="lc">----</div><p class="tag">Compartí este código con tus amigos</p><div id="lp" style="width:100%;display:grid;gap:8px"></div><p class="tag">Categoría de palabras</p><div class="chips" id="cats" style="flex-wrap:wrap;justify-content:center"></div><p class="tag" id="lm"></p><p class="tag" id="er" style="color:#ff7fa0"></p><button class="btn" id="go8">EMPEZAR PARTIDA →</button></section>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script>
+const $=s=>document.querySelector(s),W="Boca,Fútbol,Amigo,Mate,Música,Viaje,Pizza,Amor,Playa,Netflix,Familia,Pasta,Mundial,Mamá,Fiesta,Escuela,Perro,Celular,Helado,Cine,Auto,Dinero,Fortnite,YouTube".split(","),
+Q=["¿Por qué elegiste esa palabra?","Describí tu palabra sin decirla.","¿Qué hacés con esta palabra un domingo?","¿Con quién relacionás tu palabra?","Decí algo que NO tenga que ver con tu palabra.","¿A quién ves más sospechoso y por qué?","¿Tu palabra te da risa, miedo o hambre?"];
+let S={n:6,code:"",seat:0,round:1,pts:{}},A,mute=0,T,ph,RM,RC,MU=1,mi=0,mt,OFF=0;const FB={leave(){}};
+const H=s=>{let x=2166136261;for(const c of s){x^=c.charCodeAt(0);x=Math.imul(x,16777619)}return x>>>0};
+const R=s=>{let a=H(s);return()=>{a=a+1831565813|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
+function snd(q,ty="triangle",v=.09){if(mute)return;try{A=A||new(window.AudioContext||window.webkitAudioContext)();q.forEach((f,i)=>{const o=A.createOscillator(),g=A.createGain(),t=A.currentTime+i*.11;o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+.22);o.connect(g).connect(A.destination);o.start(t);o.stop(t+.24)})}catch(e){}}
+const go=id=>{document.querySelectorAll(".s").forEach(e=>e.classList.remove("on"));$("#"+id).classList.add("on");scrollTo(0,0);clearInterval(T);setTrack(id)};
+const nm=i=>S.names?S.names[i-1]+(S.code&&i==S.seat?" (tú)":""):"Jugador "+i,on=(id,f)=>$("#"+id).onclick=()=>{snd([520,660]);f()};
+const sparks=()=>{for(let i=0;i<26;i++){const e=document.createElement("i");e.className="sp";e.style.left=Math.random()*100+"%";e.style.setProperty("--x",(Math.random()*80-40)+"px");e.style.animationDelay=Math.random()*.8+"s";document.body.append(e);setTimeout(()=>e.remove(),3000)}};
+$("#mute").onclick=e=>{mute=!mute;e.target.textContent=mute?"🔇":"🔊"};
+const TR=[{b:96,r:220,w:"triangle",s:[0,3,7,12,10,7,3,null],bs:[0,-5],d:0},{b:108,r:196,w:"triangle",s:[0,4,7,11,12,11,7,4],bs:[0,5],d:1},{b:132,r:165,w:"sawtooth",s:[0,0,7,0,6,0,3,1],bs:[0,0,-2,1],d:2},{b:76,r:147,w:"triangle",s:[0,null,3,null,7,null,6,null],bs:[0,-1],d:2},{b:120,r:262,w:"square",s:[0,4,7,12,16,12,7,4],bs:[0,7,5,7],d:2}],MAP={s0:0,s1:0,s2:0,s8:0,s3:1,s4:2,s5:3,s6:4,s7:4};
+let TK=0,st=0,nx=0,MG,NB;
+function setTrack(id){const k=MAP[id];if(k!==undefined&&k!=TK){TK=k;st=0}}
+function mk(){if(MG)return;MG=A.createGain();MG.gain.value=1.3;const c=A.createDynamicsCompressor();MG.connect(c);c.connect(A.destination);NB=A.createBuffer(1,A.sampleRate*.06|0,A.sampleRate);const x=NB.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=Math.random()*2-1}
+function tone(f,t,d,ty,v){const o=A.createOscillator(),g=A.createGain();o.type=ty;o.frequency.value=f;v*=ty=="sawtooth"||ty=="square"?.45:1;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(MG);o.start(t);o.stop(t+d+.05)}
+function drum(t,k){if(k){const o=A.createOscillator(),g=A.createGain();o.frequency.setValueAtTime(130,t);o.frequency.exponentialRampToValueAtTime(40,t+.15);g.gain.setValueAtTime(.55,t);g.gain.exponentialRampToValueAtTime(.001,t+.2);o.connect(g).connect(MG);o.start(t);o.stop(t+.22)}else{const s=A.createBufferSource(),h=A.createBiquadFilter(),g=A.createGain();s.buffer=NB;h.type="highpass";h.frequency.value=7000;g.gain.value=.18;s.connect(h).connect(g).connect(MG);s.start(t)}}
+function music(){clearInterval(mt);if(!MU)return;mt=setInterval(()=>{if(mute||document.hidden||!A)return;if(A.state=="suspended")A.resume();mk();const K=TR[TK],dt=30/K.b;if(nx<A.currentTime-.3)nx=A.currentTime+.05;while(nx<A.currentTime+.3){const i=st++,n=K.s[i%K.s.length],f=x=>K.r*2**(x/12);if(n!=null)tone(f(n),nx,.3,K.w,.14);if(i%4==0)tone(f(K.bs[(i>>2)%K.bs.length]-12),nx,.7,"sine",.32);if(K.d){if(i%2)drum(nx,0);if(K.d>1&&i%4==0)drum(nx,1)}nx+=dt}},90)}
+$("#mus").onclick=e=>{MU=!MU;e.currentTarget.style.opacity=MU?1:.4;music()};
+on("go0",()=>{go("s1");music()});on("go1",()=>go("s2"));
+function sizes(){$("#sizes").innerHTML=[3,4,5,6,7,8,9,10].map(n=>`<button class="cell ${n==S.n?"sel":""}" data-n="${n}">${n==10?"10+":n}</button>`).join("");
+ document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{S.n=+b.dataset.n;snd([600]);sizes();seats()})}
+function seats(){const c="";$("#seats").innerHTML=c?`<p class="tag">¿Qué jugador sos?</p><div class="g" style="grid-template-columns:repeat(5,1fr)">${Array.from({length:S.n},(_,i)=>`<button class="cell ${S.seat==i+1?"sel":""}" style="padding:10px 0" data-s="${i+1}">${i+1}</button>`).join("")}</div>`:"";
+ document.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{S.seat=+b.dataset.s;snd([700]);seats()})}
+
+on("go2",()=>{S.code="";S.names=0;S.seat=0;S.N=S.n;S.round=1;S.pts={};deal();reveal()});
+function deal(){const r=R((S.code?S.code+"|"+S.N+"|":Math.random()+"|")+S.round),w=[...W];for(let i=w.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[w[i],w[j]]=[w[j],w[i]]}
+ S.words=w.slice(0,12);S.secret=S.words[Math.floor(r()*12)];S.inf=Math.floor(r()*S.N)+1;S.cur=S.code?S.seat:1;S.vote=0;ph=0}
+function reveal(){go("s3");const i=S.cur,inf=i==S.inf,e=$("#s3");
+ if(!ph){e.innerHTML=`<h2 style="margin-top:50px">${S.code?"TU PALABRA":"PASALE EL CELU"}</h2><div class="orb">🤫</div><p class="tag" style="font-size:16px">${S.code?"Asegurate de que nadie mire tu pantalla.":`<b style="color:var(--tx)">${nm(i)}</b>, tapá para ver tu palabra.<br>Los demás, ¡no miren!`}</p><button class="btn" id="sh" style="margin-top:auto">VER MI PALABRA</button>`;
+  $("#sh").onclick=()=>{ph=1;snd([330,440,660]);reveal()}}
+ else{e.innerHTML=`<h2 style="margin-top:20px">LAS PALABRAS</h2><p class="tag">${S.gcat&&S.code?"Categoría: <b style='color:var(--tx)'>"+S.gcat+"</b><br>":""}Cada uno recibió una palabra.<br>El infiltrado no tiene palabra.</p><div class="g">${S.words.map(w=>`<div class="cell ${!inf&&w==S.secret?"sel":""}" style="${inf?"":w==S.secret?"":"opacity:.55"}">${w}</div>`).join("")}</div><div class="note">${inf?"🕵️ <b style='color:var(--tx)'>¡Sos el infiltrado!</b> No sabés cuál es la palabra. Disimulá.":"👀 Tu palabra es <b style='color:var(--tx)'>"+S.secret+"</b>. Cuidado con el infiltrado."}</div><button class="btn" id="ok" style="margin-top:auto">ENTENDIDO →</button>`;
+  if(inf)snd([200,150],"sawtooth");$("#ok").onclick=()=>{snd([520,660]);ph=0;if(S.code){FB.ready()}else if(S.cur>=S.N){discuss()}else{S.cur++;reveal()}}}}
+function discuss(){go("s4");let t=S.code?Math.max(0,180-Math.round((Date.now()+OFF-S.t0)/1000)):180;const tick=()=>{$("#tm").textContent=String(t/60|0).padStart(2,"0")+":"+String(t%60).padStart(2,"0");$("#tm").classList.toggle("hot",t<=10);$("#pb").style.width=t/1.8+"%";
+  if(t<=10&&t>0)snd([880],"square",.04);if(t--<=0){clearInterval(T);snd([300,220,160],"sawtooth");S.code?FB.go():vote()}};tick();T=setInterval(tick,1000);chatStart()}
+const COL=["#ff6b81","#ffc34d","#5eea9a","#5ec8ff","#c79bff","#ff9a4d","#3fe0cb","#ff7fc3","#b5ee45","#9fb0c8"];
+function bub(p,t){const c=$("#chat"),d=document.createElement("div"),q=document.createElement("p"),s=document.createElement("span");s.textContent=t;
+ if(!p){d.className="m sys";q.append(s)}else{d.className="m"+(S.code&&p==S.seat?" me":"");const a=document.createElement("b"),n=document.createElement("small");a.style.background=COL[(p-1)%10];a.textContent=p;if(S.code&&S.avs&&S.avs[p-1]){a.style.background="none";a.innerHTML=av(S.avs[p-1],30)}n.textContent=nm(p);q.append(n,s);d.append(a)}
+ d.append(q);c.append(d);c.scrollTop=c.scrollHeight}
+function say(t){t=(t||"").trim().slice(0,140);if(!t||S.code&&S.dead&&S.dead[S.seat])return;S.code||bub(S.talk,t);snd([700,900]);$("#mi").value="";
+ if(S.code)FB.say(t);else if(RM)RM.emit("chat",{p:S.talk,t}).catch(()=>{RM=null;$("#cs").textContent="⚪ Chat local: no se pudo enviar a la sala"})}
+async function chatStart(){S.talk=S.code?S.seat:1;if(!S.turn)$("#chat").innerHTML="";bub(0,S.turn?"Nueva ronda de debate · quedan "+S.alive+" jugadores":"Hablen, hagan preguntas y encuentren al infiltrado 🕵️");
+ const QQ=["🤔","😂","🔥","😱","👀",...Q];$("#qs").innerHTML=QQ.map(q=>`<button class="chip">${q}</button>`).join("");$("#qs").querySelectorAll("button").forEach((b,i)=>b.onclick=()=>say(QQ[i]));
+ $("#sp").innerHTML=S.code?"":Array.from({length:S.N},(_,i)=>`<button class="chip ${S.talk==i+1?"sel":""}" data-t="${i+1}">${nm(i+1)}</button>`).join("");
+ $("#sp").querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{S.talk=+b.dataset.t;snd([600]);$("#sp").querySelectorAll("button").forEach(x=>x.classList.toggle("sel",x==b))});
+ $("#cs").textContent=S.code?"⚪ Conectando a la sala "+S.code+"…":"💬 Un solo celu: elegí quién habla";
+ if(!S.code)return;$("#cs").textContent="🟢 Sala en vivo · "+S.code+(S.gcat?" · "+S.gcat:"");return;
+ try{if(!RM||RC!=S.code){RM&&RM.leave();RM=null;const r=window.claude&&await claude.use("room");if(!r)throw 0;RM=await r.join("sx-"+S.code.toLowerCase().replace(/[^a-z0-9]/g,""));RC=S.code;
+  RM.on("chat",g=>{const m=g.data;if(!g.isMe&&m&&m.p>=1&&m.p<=S.N&&typeof m.t=="string"){bub(m.p|0,m.t.slice(0,140));snd([500])}})}
+  $("#cs").textContent="🟢 Sala en vivo · "+S.code}catch(e){RM=null;$("#cs").textContent="⚪ Chat local: la sala en vivo no está disponible"}}
+$("#sb").onclick=()=>say($("#mi").value);$("#mi").onkeydown=e=>{if(e.key=="Enter")say(e.target.value)};on("go4",()=>{if(!S.code)return vote();if(!FB.isHost())return;if(!S.cf){S.cf=1;$("#go4").textContent="¿SEGURO? TOCÁ DE NUEVO";setTimeout(()=>{S.cf=0;$("#go4").textContent="IR A VOTAR →"},3000);return}S.cf=0;FB.go()});
+function vote(){go("s5");const l=$("#vl");l.innerHTML=Array.from({length:S.N},(_,i)=>S.dead&&S.dead[i+1]?"":`<button class="row ${S.vote==i+1?"sel":""}" data-v="${i+1}"><u></u>${S.code&&S.avs?av(S.avs[i],30):""}${nm(i+1)}${S.code&&i+1==S.seat?"<em>👑</em>":""}</button>`).join("");
+ l.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{S.vote=+b.dataset.v;snd([600]);vote()})}
+on("go5",()=>{if(!S.vote){snd([200],"square");return}S.code?FB.vote():result()});
+function result(){go("s6");const ok=S.vote==S.inf;for(let i=1;i<=S.N;i++)S.pts[i]=(S.pts[i]||0)+((i==S.inf)==!ok?1:0);
+ $("#orb").className="orb";$("#orb").textContent="?";$("#who").style.visibility=$("#msg").style.visibility="hidden";snd([220,230,240],"sawtooth",.05);
+ setTimeout(()=>{$("#orb").innerHTML=S.code&&S.avs&&S.avs[S.inf-1]?av(S.avs[S.inf-1],110):"🕵️";$("#orb").className="orb flip";$("#who").textContent=nm(S.inf).toUpperCase();$("#who").style.visibility="visible";
+  $("#msg").style.visibility="visible";$("#msg").innerHTML=(ok?"¡Lo lograron! 🎯 Buen trabajo Six Sevens.":"¡Se escapó! 😈 El infiltrado gana esta ronda.")+"<br>La palabra era <b style='color:var(--tx)'>"+S.secret+"</b>.";
+  snd(ok?[523,659,784,1047]:[392,330,262,196],ok?"triangle":"sawtooth");if(ok)sparks()},1600)}
+on("go6",()=>{go("s7");const o=Array.from({length:S.N},(_,i)=>i+1).sort((a,b)=>(S.pts[b]||0)-(S.pts[a]||0));
+ $("#rk").innerHTML=o.map((p,k)=>`<div class="row" style="cursor:default;animation:in .4s ${k*.08}s both"><b style="width:24px;color:var(--v2)">${k?k+1:"👑"}</b>${S.code&&S.avs?av(S.avs[p-1],30):""}${nm(p)}<em>${S.pts[p]||0}/${S.round}</em></div>`).join("")});
+on("again",()=>{if(S.code){FB.again();return}S.round++;deal();reveal()});on("home",()=>{FB.leave();RM&&RM.leave();RM=null;go("s0")});
+const FA=["😀","😎","🤠","🥳","😈","👽","🤖","🐸","🐱","🐶","🦊","🐼","🐵","🦁","🐧","🐙"],AC=["","👑","🎩","🧢","🎧"];let AV=[0,0,0];
+function av(c,z){const[a,b,d]=String(c||"0.0.0").split(".").map(x=>Math.abs(parseInt(x))||0);return `<span class="av" style="--s:${z}px;background:${COL[a%10]}">${FA[b%16]}${AC[d%5]?`<i>${AC[d%5]}</i>`:""}</span>`}
+function avUI(){$("#avv").innerHTML=av(AV.join("."),64);try{localStorage.sxa=AV.join(".")}catch(e){}}
+document.querySelectorAll("#avp [data-k]").forEach(b=>b.onclick=()=>{const k=+b.dataset.k;snd([600+k*80]);if(k==3)AV=[Math.random()*10|0,Math.random()*16|0,Math.random()*5|0];else AV[k]=(AV[k]+1)%[10,16,5][k];avUI()});
+try{const q=(localStorage.sxa||"").split(".").map(Number);if(q.length==3&&q.every(x=>x>=0))AV=q}catch(e){}
+avUI();sizes();
+</script>
+<script>
+if(window.firebase){firebase.initializeApp({apiKey:"AIzaSyBorEq6_jpgNcbEd3APi5Vkrg0vdYftlsU",authDomain:"mis-six-sevens.firebaseapp.com",databaseURL:"https://mis-six-sevens-default-rtdb.firebaseio.com",projectId:"mis-six-sevens",appId:"1:545088860891:web:98358d7b95550ca79ed2fe"});
+const D=firebase.database(),TS=firebase.database.ServerValue.TIMESTAMP,cl=s=>String(s||"?").replace(/[<>&"'`]/g,"").slice(0,12);
+let ref,host,G={},last="",ok=0,pid;try{pid=localStorage.sxp||(localStorage.sxp=Math.random().toString(36).slice(2,9))}catch(e){pid=Math.random().toString(36).slice(2,9)}
+D.ref(".info/connected").on("value",x=>ok=x.val());D.ref(".info/serverTimeOffset").on("value",x=>OFF=x.val()||0);
+FB.join=()=>{const c=$("#code").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,8),n=cl($("#nm0").value.trim()||"Jugador");
+ if(c.length<3){snd([200],"square");$("#code").placeholder="MÍNIMO 3 LETRAS";return}
+ FB.leave();S.code=c;S.names=0;S.round=0;last="";ref=D.ref("rooms/"+c);
+ ref.child("players/"+pid).set({n,t:TS,a:AV.join(".")});ref.child("host").transaction(h=>h||pid);
+ ref.on("value",x=>tick(x.val()||{}));
+ ref.child("chat").on("child_added",x=>{const m=x.val();if(m&&m.p>=1&&m.p<=(S.N||0)&&typeof m.t=="string"){bub(m.p|0,m.t.slice(0,140));if(m.p!=S.seat)snd([500])}});
+ try{localStorage.sxs=JSON.stringify({c,n})}catch(e){}$("#er").textContent="";go("s8");setTimeout(()=>{if(!ok)$("#er").textContent="⚠️ No se pudo conectar a la base de datos. Revisá el databaseURL."},8000)};
+FB.leave=()=>{try{localStorage.removeItem("sxs")}catch(e){}if(ref){ref.off();ref.child("chat").off();ref.child("players/"+pid).remove();ref=null}S.code="";S.names=0};
+function tick(v){const P=v.players||{},ids=Object.keys(P).sort((a,b)=>(P[a].t||0)-(P[b].t||0)),g=v.game||{};host=v.host;G=g;S.ids=ids;S.cat=v.cat||"Mixta";catUI();
+ if(host&&!P[host]&&ids[0]==pid)ref.child("host").set(pid);
+ $("#lc").textContent=S.code;$("#lp").innerHTML=ids.map((i,k)=>`<div class="row" style="cursor:default">${av(P[i].a,34)}${cl(P[i].n)}${i==host?"<em>👑</em>":""}</div>`).join("");
+ const h=host==pid;$("#go8").style.display=h?"":"none";$("#lm").textContent=h?(ids.length<3?"Faltan jugadores: mínimo 3 (hay "+ids.length+")":"¡Listos! Tocá EMPEZAR"):"Esperando que el anfitrión empiece…";
+ const o=g.order;if(!g.phase||!o||!o.includes(pid))return;
+ S.N=o.length;S.ord=o;S.names=o.map(i=>cl(P[i]&&P[i].n));S.avs=o.map(i=>P[i]&&P[i].a);S.seat=o.indexOf(pid)+1;
+ const dd=Object.values(g.dead||{});S.dead={};dd.forEach(p=>S.dead[o.indexOf(p)+1]=1);S.alive=o.length-dd.length;S.turn=g.turn||0;const k=g.round+":"+S.turn+":"+g.phase;
+ if(k!=last){last=k;
+  if(g.phase=="reveal"){Object.assign(S,{round:g.round,gcat:g.cat,words:g.words,secret:g.secret,inf:o.indexOf(g.inf)+1,cur:S.seat,vote:0});ph=0;$("#again").textContent="OTRA RONDA ↻";reveal()}
+  else if(g.phase=="talk"){S.t0=g.t0||Date.now()+OFF;S.vote=0;S.cf=0;discuss();$("#go4").textContent="IR A VOTAR →";$("#go4").style.display=h?"":"none";$("#tw").style.display=h?"none":"";const d=!!S.dead[S.seat];$("#mi").disabled=d;$("#sb").disabled=d;$("#mi").placeholder=d?"Eliminado 👻 (solo mirás)":"Escribí tu mensaje…";const al=o.map((_,i)=>i+1).filter(i=>!S.dead[i]&&i!=S.seat);$("#pt").innerHTML=al.map(i=>`<button class="chip" data-p="${i}">☝️ ${nm(i)}</button>`).join("");$("#pt").querySelectorAll("button").forEach(b=>b.onclick=()=>say("☝️ Sospecho de "+nm(+b.dataset.p)))}
+  else if(g.phase=="vote"){const d=!!S.dead[S.seat];$("#go5").disabled=d;$("#go5").textContent=d?"ELIMINADO 👻 · mirás":"VOTAR →";vote()}
+  else if(g.phase=="result"){const q=g.out||{},e=q.ej?o.indexOf(q.ej)+1:0;if(q.over){$("#rt").textContent="¡EL INFILTRADO ERA…!";$("#go6").style.display="";S.vote=q.win=="crew"?S.inf:e;result()}else{FB.eject(e);if(h)setTimeout(()=>{if(G.phase=="result"&&(G.turn||0)==S.turn)ref.update({"game/phase":"talk","game/turn":S.turn+1,"game/t0":TS,votes:null})},7000)}}}
+ if(h){if(g.phase=="reveal"&&o.every(i=>(v.ready||{})[i]))ref.update({"game/phase":"talk","game/t0":TS});
+  if(g.phase=="vote"){const D0=Object.values(g.dead||{}),al=o.filter(i=>!D0.includes(i)),vt=v.votes||{};if(al.every(i=>vt[i])){const c={};al.forEach(i=>c[vt[i]]=(c[vt[i]]||0)+1);const t=Object.entries(c).sort((a,b)=>b[1]-a[1]),ej=t.length&&(t.length<2||t[0][1]>t[1][1])?t[0][0]:null,dn=ej?[...D0,ej]:D0,win=ej==g.inf?"crew":ej&&o.length-dn.length<=2?"inf":null;ref.update({"game/phase":"result","game/dead":dn.length?dn:null,"game/out":{ej:ej||null,over:!!win,win:win||null}})}}}}
+const CATS={"Mixta":W,"Six Sevens":"Canal,67,Corona,Infiltrado,Directo,Suscriptor,Familia,Video,Like,Comentario,Mate,Amigos,Broma,Desafío".split(","),"Fútbol":"Gol,Messi,Mundial,Penal,Árbitro,Cancha,Hinchada,Camiseta,Boca,River,Offside,Arquero,Copa,Pelota".split(","),"Comida":"Pizza,Asado,Empanada,Milanesa,Helado,Mate,Alfajor,Fideos,Hamburguesa,Sushi,Choripán,Torta,Papas,Medialuna".split(","),"Animales":"Perro,Gato,León,Delfín,Tiburón,Caballo,Pingüino,Mono,Jirafa,Águila,Tortuga,Lobo,Oso,Vaca".split(","),"Lugares":"Playa,Escuela,Cancha,Hospital,Aeropuerto,Cine,Boliche,Shopping,Plaza,Banco,Parque,Gimnasio,Iglesia,Kiosco".split(","),"Internet":"Fortnite,YouTube,TikTok,Netflix,Meme,Streamer,Discord,Instagram,WhatsApp,Roblox,Minecraft,Twitch,Spotify,Google".split(","),"Películas":"Titanic,Shrek,Avengers,Toy Story,Harry Potter,Batman,Frozen,Matrix,Spider-Man,Jurassic Park,Star Wars,Minions,Coco,Terminator".split(","),"Series":"Stranger Things,Breaking Bad,Dragon Ball,Naruto,Los Simpson,Squid Game,La Casa de Papel,Friends,One Piece,Peaky Blinders,Pokémon,Bob Esponja,Rick y Morty,The Last of Us".split(","),"Música":"Cumbia,Trap,Rock,Guitarra,Micrófono,Reggaetón,Cuarteto,Recital,Auriculares,Batería,Karaoke,Cantante,Rap,Concierto".split(","),"Profesiones":"Doctor,Bombero,Policía,Profesor,Cocinero,Piloto,Abogado,Albañil,Youtuber,Futbolista,Panadero,Peluquero,Chofer,Músico".split(","),"Sorpresa":W};
+const catUI=()=>{$("#cw2").style.display=S.code?"":"none";const h=Object.keys(CATS).map(c=>`<button class="chip ${c==S.cat?"sel":""}" data-c="${c}">${c=="Sorpresa"?"🎲 Sorpresa":c}</button>`).join("");["#cats","#cats2"].forEach(q=>{$(q).innerHTML=h;$(q).querySelectorAll("button").forEach(b=>b.onclick=()=>{if(host==pid){snd([600]);ref.child("cat").set(b.dataset.c)}else snd([200],"square")})})};
+FB.eject=e=>{go("s6");$("#go6").style.display="none";$("#rt").textContent="VOTACIÓN";$("#orb").className="orb flip";$("#orb").innerHTML=e&&S.avs&&S.avs[e-1]?av(S.avs[e-1],110):(e?"👻":"🤝");$("#who").textContent=e?nm(e).toUpperCase():"EMPATE";$("#who").style.visibility="visible";$("#msg").style.visibility="visible";$("#msg").innerHTML=e?"fue eliminado... ¡y <b style='color:var(--tx)'>no era</b> el infiltrado! 😬<br>Quedan "+S.alive+" jugadores. El debate sigue.":"Nadie fue eliminado. El debate sigue.";snd(e?[330,262,196]:[400,400],"sawtooth")};
+FB.isHost=()=>host==pid;FB.ready=()=>{ref.child("ready/"+pid).set(1);$("#s3").innerHTML='<h2 style="margin-top:60px">LISTO ✅</h2><div class="orb">⏳</div><p class="tag">Esperando a los demás…</p>'};
+FB.go=()=>ref.child("game/phase").transaction(p=>p=="talk"?"vote":p);
+FB.say=t=>ref.child("chat").push({p:S.seat,t});
+FB.vote=()=>{ref.child("votes/"+pid).set(S.ord[S.vote-1]);$("#go5").disabled=true;$("#go5").textContent="Esperando a los demás…"};
+FB.start=()=>{const ids=S.ids||[];if(ids.length<3){snd([200],"square");return}const kk=Object.keys(CATS).filter(c=>c!="Sorpresa"),cn=S.cat=="Sorpresa"||!CATS[S.cat]?kk[Math.floor(Math.random()*kk.length)]:S.cat,rd=(G.round||0)+1,r=R(Math.random()+"|"+rd),w=[...CATS[cn]];for(let i=w.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[w[i],w[j]]=[w[j],w[i]]}const ws=w.slice(0,12);
+ ref.update({game:{round:rd,turn:0,cat:cn,phase:"reveal",order:ids,words:ws,secret:ws[Math.floor(r()*ws.length)],inf:ids[Math.floor(r()*ids.length)]},chat:null,votes:null,ready:null})};
+FB.again=()=>{if(host==pid)FB.start();else $("#again").textContent="Esperando al anfitrión…"};
+$("#go8").onclick=()=>{snd([520,660]);FB.start()};
+try{const q=JSON.parse(localStorage.sxs||"null");if(q){const b=document.createElement("button");b.className="btn";b.textContent="🔄 VOLVER A LA SALA "+q.c;b.onclick=()=>{snd([520,660]);$("#code").value=q.c;$("#nm0").value=q.n;FB.join()};$("#s0").insertBefore(b,$("#go0"))}}catch(e){};$("#go2o").onclick=()=>{snd([520,660]);FB.join()}}
+</script>
+<script>if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))</script></body></html>
